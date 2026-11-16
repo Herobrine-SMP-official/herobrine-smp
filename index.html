@@ -182,7 +182,13 @@ const CONFIG = {
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const head = n => `https://minotar.net/avatar/${encodeURIComponent(n)}/64`;
+const bedrockHead = n => {
+  const clean = n.replace(/^\.+/, '') || '?';
+  let h = 0; for (const c of clean) h = (h * 31 + c.charCodeAt(0)) % 360;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="hsl(${h},55%,38%)"/><rect x="4" y="4" width="56" height="56" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="4"/><text x="32" y="44" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle" fill="#fff">${clean[0].toUpperCase()}</text></svg>`;
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
+};
+const head = n => n.startsWith('.') ? bedrockHead(n) : `https://minotar.net/avatar/${encodeURIComponent(n)}/64`;
 const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 function playerCard(p){
