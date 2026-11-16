@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,24 +52,26 @@ h2{font-size:15px;margin-bottom:28px;color:var(--acc);text-shadow:0 0 16px #ff3b
 .badge{display:inline-flex;align-items:center;gap:9px;margin-top:22px;color:var(--mute);font-size:14px}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--mute)}
 .on .dot{background:var(--ok);box-shadow:0 0 12px var(--ok);animation:pulse 1.6s infinite}.off .dot{background:var(--acc)}
+.platforms{margin-top:14px;font-size:13px;color:var(--mute)}
 
 /* cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;backdrop-filter:blur(8px);transition:transform .25s,border-color .3s,box-shadow .3s;will-change:transform}
 .card:hover{border-color:#ff3b3b88;box-shadow:0 10px 40px -10px #ff3b3b55}
 .stat b{display:block;font-size:30px;font-weight:800;background:linear-gradient(90deg,#fff,#ff7a7a);-webkit-background-clip:text;background-clip:text;color:transparent}
 .stat span{color:var(--mute);font-size:13px}
 .pl{display:flex;gap:13px;align-items:center}
-.pl img{width:46px;height:46px;border-radius:9px;image-rendering:pixelated;background:#222}
+.pl img{width:46px;height:46px;border-radius:9px;image-rendering:pixelated;background:#222;flex:none}
 .pl small{color:var(--mute);display:block;font-size:12px}
 .role{color:var(--acc);font-size:12px;font-weight:600}
 .feat h3{font-size:15px;margin-bottom:6px}.feat p{color:var(--mute);font-size:14px}
 .rules li,.steps li{margin:0 0 12px 22px}
-.btn{display:inline-block;background:linear-gradient(135deg,#ff3b3b,#c20f3a);color:#fff;font-weight:800;padding:12px 24px;border-radius:10px;text-decoration:none;transition:.25s}
+.btn{display:inline-block;background:linear-gradient(135deg,#ff3b3b,#c20f3a);color:#fff;font-weight:800;padding:12px 24px;border-radius:10px;text-decoration:none;transition:.25s;border:0;cursor:pointer;font-family:inherit;font-size:15px}
 .btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px #ff3b3b}
 .muted{color:var(--mute);font-size:14px}
 
-/* leaderboard */
+/* tabs + leaderboard */
 .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
 .tab{background:var(--card);border:1px solid var(--line);color:var(--mute);padding:9px 16px;border-radius:999px;cursor:pointer;font:600 13px Inter,sans-serif;transition:.25s}
 .tab:hover{color:#fff}.tab.act{background:var(--acc);border-color:var(--acc);color:#fff;box-shadow:0 0 20px #ff3b3b66}
@@ -82,6 +84,19 @@ h2{font-size:15px;margin-bottom:28px;color:var(--acc);text-shadow:0 0 16px #ff3b
 .row b{font-variant-numeric:tabular-nums}
 #lbNote{font-size:12px;color:var(--mute);margin-top:10px}
 
+/* players section */
+.ptools{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+.search{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);color:var(--txt);padding:11px 16px;border-radius:10px;font:400 14px Inter,sans-serif;outline:none;transition:.25s}
+.search:focus{border-color:var(--acc);box-shadow:0 0 18px #ff3b3b44}
+
+/* join section */
+.kv{display:flex;align-items:center;gap:12px;background:#ffffff08;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:10px;flex-wrap:wrap}
+.kv span{color:var(--mute);font-size:13px;min-width:110px}
+.kv code{font-family:monospace;font-size:16px;flex:1;word-break:break-all}
+.cp{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:6px 14px;font:800 12px Inter,sans-serif;cursor:pointer;transition:.2s}
+.cp:hover{transform:scale(1.07)}
+.note{color:var(--mute);font-size:13px;margin-top:6px}
+
 footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-top:1px solid var(--line)}
 #toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,30px);background:var(--acc);color:#fff;padding:10px 18px;border-radius:10px;font-weight:800;opacity:0;transition:.35s;z-index:50;pointer-events:none}
 #toast.show{opacity:1;transform:translate(-50%,0)}
@@ -89,12 +104,12 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
 .rv{opacity:0;transform:translateY(34px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.row{opacity:1;transform:none}}
-.sk{display:block;border-radius:9px;image-rendering:pixelated;background-repeat:no-repeat;background-size:800% 800%;background-position:71.4286% 14.2857%,14.2857% 14.2857%;background-color:#222}
+.sk{display:block;border-radius:9px;image-rendering:pixelated;background-repeat:no-repeat;background-size:800% 800%;background-position:71.4286% 14.2857%,14.2857% 14.2857%;background-color:#222;flex:none}
 .pl .sk{width:46px;height:46px}.row .sk{width:36px;height:36px;border-radius:7px}
 </style>
 </head>
 <body>
-<div id="loader"><div><div class="eyes"><i></i><i></i></div><p class="px">HEROBRINE JAAG RAHA HAI...</p></div></div>
+<div id="loader"><div><div class="eyes"><i></i><i></i></div><p class="px">HEROBRINE IS AWAKENING...</p></div></div>
 <canvas id="fx"></canvas><div id="cursor"></div>
 
 <nav>
@@ -107,7 +122,8 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
   <div class="eyes"><i></i><i></i></div>
   <h1 class="glitch px" id="heroName"></h1>
   <p id="tagline"></p>
-  <div class="ip" id="ipBox"><span id="ipText"></span><small>COPY</small></div><br>
+  <div class="ip" id="ipBox" title="Click to copy"><span id="ipText"></span><small>COPY</small></div><br>
+  <div class="platforms">Java Edition + Bedrock Edition supported</div>
   <div class="badge" id="badge"><span class="dot"></span><span id="badgeText">Checking...</span></div>
 </section>
 
@@ -119,8 +135,8 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
     <div class="card stat tilt"><b id="sVer">-</b><span>Version</span></div>
     <div class="card stat tilt"><b id="sState">-</b><span>Server</span></div>
   </div>
-  <h3 style="margin:30px 0 14px;font-size:15px">Abhi Online</h3>
-  <div class="grid" id="onlineList"><p class="muted">Loading...</p></div>
+  <h3 style="margin:30px 0 14px;font-size:15px">Online Now</h3>
+  <div class="plist" id="onlineList"><p class="muted">Loading...</p></div>
 </section>
 
 <section id="leaderboard" class="rv">
@@ -130,60 +146,67 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
   <p id="lbNote"></p>
 </section>
 
-<section id="players" class="rv"><h2 class="px">PLAYERS / TEAM</h2><div class="grid" id="playerList"></div></section>
+<section id="players" class="rv">
+  <h2 class="px">PLAYERS</h2>
+  <div class="ptools">
+    <input class="search" id="search" type="search" placeholder="Search players..." autocomplete="off">
+    <span class="muted" id="pCount"></span>
+  </div>
+  <div class="plist" id="playerList"><p class="muted">Loading players...</p></div>
+  <p style="margin-top:22px;text-align:center"><button class="btn" id="more" style="display:none">Show more</button></p>
+</section>
+
 <section id="features" class="rv"><h2 class="px">FEATURES</h2><div class="grid" id="featList"></div></section>
 <section id="rules" class="rv"><h2 class="px">RULES</h2><div class="card"><ol class="rules" id="ruleList"></ol></div></section>
-<section id="join" class="rv"><h2 class="px">KAISE JOIN KAREIN</h2>
-  <div class="card"><ol class="steps" id="stepList"></ol><p style="margin-top:20px"><a class="btn" id="discord" target="_blank" rel="noopener">Discord Join Karo</a></p></div>
+
+<section id="join" class="rv">
+  <h2 class="px">HOW TO JOIN</h2>
+  <div class="tabs" id="jtabs">
+    <button class="tab act" data-j="java">Java Edition</button>
+    <button class="tab" data-j="bedrock">Bedrock Edition</button>
+  </div>
+  <div class="card" id="joinBody"></div>
+  <p style="margin-top:22px"><a class="btn" id="discord" target="_blank" rel="noopener">Join our Discord</a></p>
 </section>
 </main>
 
 <footer>&copy; <span id="yr"></span> <span id="footName"></span> | Not affiliated with Mojang or Microsoft</footer>
-<div id="toast">IP copy ho gayi!</div>
+<div id="toast">Copied!</div>
 
 <script>
-// ============ APNI DETAILS YAHAN DAALO ============
+// ============ EDIT YOUR DETAILS HERE ============
 const CONFIG = {
   name: "Herobrine SMP",
-  tagline: "Ek mysterious survival world jahan Herobrine ki kahani zinda hai. Aao, survive karo!",
+  tagline: "A mysterious survival world where the legend of Herobrine lives on. Join us and survive!",
   ip: "herobrine-pvt-smp.play.hosting",
+  javaPort: "",          // leave empty if Java uses the default port (25565)
+  bedrockPort: "19132",  // change this if your Bedrock port is different (check the Network tab in your panel)
   version: "26.3",
   discord: "https://discord.gg/yourinvite",
-  players: [
-    {name:"Notch", role:"Owner", joined:"Jan 2025"},
-    {name:"jeb_", role:"Admin", joined:"Jan 2025"},
-    {name:"Dream", role:"Moderator", joined:"Mar 2025"},
-    {name:"Technoblade", role:"Member", joined:"Jun 2025"}
-  ],
   features: [
-    {t:"Herobrine Lore", d:"Hidden quests aur mysterious events."},
+    {t:"Herobrine Lore", d:"Hidden quests and mysterious events."},
     {t:"Survival SMP", d:"Pure survival, no pay-to-win."},
-    {t:"Land Claim", d:"Apni base ko griefers se bachao."},
-    {t:"Weekly Events", d:"PvP, build contests aur prizes."},
-    {t:"Active Staff", d:"Help ke liye staff hamesha available."},
-    {t:"Cracked + Premium", d:"Dono players join kar sakte hain."}
+    {t:"Java + Bedrock", d:"Play together from PC, mobile and tablet."},
+    {t:"Land Claim", d:"Protect your base from griefers."},
+    {t:"Weekly Events", d:"PvP, build contests and prizes."},
+    {t:"Active Staff", d:"Our staff is always here to help."}
   ],
   rules: [
-    "Hacking, x-ray aur unfair mods allowed nahi hain.",
-    "Griefing ya stealing mana hai.",
-    "Sabke saath respect se baat karo, no toxicity.",
-    "Bina permission ke PvP nahi.",
-    "Staff ka decision final hoga."
+    "Hacking, x-ray and unfair mods are not allowed.",
+    "No griefing or stealing.",
+    "Respect everyone. No toxicity or hate.",
+    "No PvP without consent.",
+    "Staff decisions are final."
   ],
-  steps: [
-    "Minecraft Java Edition kholo.",
-    "Multiplayer, phir Add Server pe click karo.",
-    "Server Address me upar wali IP paste karo.",
-    "Discord join karke verify complete karo.",
-    "Join karo aur enjoy karo!"
-  ],
-  // Leaderboard data file (baad me script isse banayegi). Nahi mili to demo data dikhega.
   statsFile: "stats.json"
 };
-// ==================================================
+// ================================================
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- avatars ---------- */
 const SK = {};
 const letterHead = n => {
   const clean = n.replace(/^\.+/, '') || '?';
@@ -197,20 +220,25 @@ const avatar = p => {
   if (s) { const u = `url(https://textures.minecraft.net/texture/${s})`; return `<span class="sk" style="background-image:${u},${u}"></span>`; }
   return `<img src="${head(p.name)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`;
 };
-const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const platform = n => n.startsWith('.') ? 'Bedrock' : 'Java';
 
-function playerCard(p){
-  return `<div class="card pl tilt">${avatar(p)}
-  <div><b>${esc(p.name)}</b>${p.role?` <span class="role">${esc(p.role)}</span>`:''}${p.joined?`<small>Joined: ${esc(p.joined)}</small>`:''}</div></div>`;
+/* ---------- helpers ---------- */
+function toast(msg){
+  const t=$('toast');t.textContent=msg||'Copied!';t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1600);
 }
-
+async function copyText(txt){
+  try{await navigator.clipboard.writeText(txt)}catch(e){}
+  toast('Copied: '+txt);
+}
 function countUp(el, to){
   if(isNaN(to)||reduce){el.textContent=to;return}
-  const from=0,t0=performance.now(),d=1200;
+  const t0=performance.now(),d=1200;
   (function f(t){const k=Math.min((t-t0)/d,1),e=1-Math.pow(1-k,3);
-    el.textContent=Math.round(from+(to-from)*e);if(k<1)requestAnimationFrame(f)})(t0);
+    el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(f)})(t0);
 }
 
+/* ---------- static content ---------- */
 function render(){
   document.title=CONFIG.name+" | Minecraft Server";
   $('navName').textContent=CONFIG.name;
@@ -221,13 +249,60 @@ function render(){
   $('ipText').textContent=CONFIG.ip;
   $('yr').textContent=new Date().getFullYear();
   $('discord').href=CONFIG.discord;
-  $('playerList').innerHTML=CONFIG.players.map(playerCard).join('');
   $('featList').innerHTML=CONFIG.features.map(f=>`<div class="card feat tilt"><h3>${esc(f.t)}</h3><p>${esc(f.d)}</p></div>`).join('');
   $('ruleList').innerHTML=CONFIG.rules.map(r=>`<li>${esc(r)}</li>`).join('');
-  $('stepList').innerHTML=CONFIG.steps.map(r=>`<li>${esc(r)}</li>`).join('');
+  drawJoin('java');
 }
 
+/* ---------- join section ---------- */
+function kv(label,val){
+  return `<div class="kv"><span>${label}</span><code>${esc(val)}</code><button class="cp" data-c="${esc(val)}">Copy</button></div>`;
+}
+function drawJoin(t){
+  const javaAddr = CONFIG.ip + (CONFIG.javaPort ? ':'+CONFIG.javaPort : '');
+  if(t==='java'){
+    $('joinBody').innerHTML = kv('Server Address', javaAddr) + `
+    <ol class="steps" style="margin-top:18px">
+      <li>Open <b>Minecraft: Java Edition</b> (version ${esc(CONFIG.version)} recommended).</li>
+      <li>Click <b>Multiplayer</b>, then <b>Add Server</b>.</li>
+      <li>Type any server name and paste the <b>Server Address</b> above.</li>
+      <li>Click <b>Done</b>, select the server and press <b>Join Server</b>.</li>
+      <li>Join our Discord and read the rules before you start playing.</li>
+    </ol>`;
+  } else {
+    $('joinBody').innerHTML = kv('Server Address', CONFIG.ip) + kv('Port', CONFIG.bedrockPort) + `
+    <ol class="steps" style="margin-top:18px">
+      <li>Open <b>Minecraft: Bedrock Edition</b> on your phone, tablet or Windows PC.</li>
+      <li>Tap <b>Play</b>, open the <b>Servers</b> tab, scroll down and tap <b>Add Server</b>.</li>
+      <li>Enter any server name, paste the <b>Server Address</b> and enter the <b>Port</b> above.</li>
+      <li>Tap <b>Save</b>, select the server and press <b>Join</b>.</li>
+      <li>Your in-game name will show a dot (.) before it. This is normal for Bedrock players.</li>
+    </ol>
+    <p class="note">Console players (Xbox, PlayStation, Switch) cannot add custom servers directly. Ask in our Discord for help.</p>`;
+  }
+}
+$('jtabs').onclick=e=>{
+  const j=e.target.dataset.j;if(!j)return;
+  document.querySelectorAll('#jtabs .tab').forEach(b=>b.classList.toggle('act',b.dataset.j===j));
+  drawJoin(j);
+};
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.cp');if(b)copyText(b.dataset.c);
+});
+
 /* ---------- live status ---------- */
+let ONLINE=[];
+function memberCard(p, stats){
+  const line = stats ? `<small>${p.playtime||0} hrs &middot; ${p.kills||0} kills &middot; ${p.deaths||0} deaths</small>` : '';
+  return `<div class="card pl tilt">${avatar(p)}
+  <div><b>${esc(p.name)}</b> <span class="role">${platform(p.name)}</span>${line}</div></div>`;
+}
+function drawOnline(){
+  $('onlineList').innerHTML = ONLINE.length
+    ? ONLINE.map(n=>memberCard({name:n},false)).join('')
+    : '<p class="muted">Nobody is online right now.</p>';
+  bindTilt();
+}
 async function status(){
   const b=$('badge');
   try{
@@ -238,13 +313,12 @@ async function status(){
     countUp($('sOnline'),d.players.online);countUp($('sMax'),d.players.max);
     $('sVer').textContent=(d.version&&d.version.name_clean)||CONFIG.version;
     $('sState').textContent='Online';
-    const l=d.players.list||[];
-    $('onlineList').innerHTML=l.length?l.map(p=>playerCard({name:p.name_clean})).join(''):'<p class="muted">Abhi koi online nahi hai.</p>';
-    bindTilt();
+    ONLINE=(d.players.list||[]).map(p=>p.name_clean);
+    drawOnline();
   }catch(e){
-    b.className='badge off';$('badgeText').textContent='Server offline ya check nahi ho paya';
+    b.className='badge off';$('badgeText').textContent='Server is offline or could not be reached';
     $('sOnline').textContent='0';$('sMax').textContent='-';$('sVer').textContent=CONFIG.version;$('sState').textContent='Offline';
-    $('onlineList').innerHTML='<p class="muted">Server abhi offline hai.</p>';
+    ONLINE=[];$('onlineList').innerHTML='<p class="muted">The server is offline right now.</p>';
   }
 }
 
@@ -254,18 +328,12 @@ const CATS=[
   {k:'kills',l:'Top Kills',f:v=>v.toLocaleString()},
   {k:'deaths',l:'Top Deaths',f:v=>v.toLocaleString()},
   {k:'playtime',l:'Playtime',f:v=>v.toLocaleString()+' hrs'},
-    {k:'mined',l:'Blocks Mined',f:v=>v.toLocaleString()}
-    ];
-const DEMO=[
-  {name:"Notch",money:98500,kills:142,deaths:30,playtime:310,mined:50210},
-  {name:"jeb_",money:75400,kills:98,deaths:55,playtime:270,mined:44100},
-  {name:"Dream",money:61200,kills:210,deaths:80,playtime:240,mined:30800},
-  {name:"Technoblade",money:50000,kills:305,deaths:41,playtime:200,mined:22650},
-  {name:"Steve",money:22000,kills:20,deaths:99,playtime:90,mined:12000}
+  {k:'mined',l:'Blocks Mined',f:v=>v.toLocaleString()}
 ];
-let LB=DEMO,cur='money';
+let LB=[],cur='money';
 
 function drawLB(){
+  if(!LB.length){$('lb').innerHTML='<p class="muted">Leaderboard data is not available yet.</p>';return}
   const c=CATS.find(x=>x.k===cur);
   const list=[...LB].sort((a,b)=>(b[cur]||0)-(a[cur]||0)).slice(0,10);
   const max=Math.max(1,...list.map(p=>p[cur]||0));
@@ -278,19 +346,38 @@ function tabs(){
   $('tabs').innerHTML=CATS.map(c=>`<button class="tab ${c.k===cur?'act':''}" data-k="${c.k}">${c.l}</button>`).join('');
   $('tabs').onclick=e=>{const k=e.target.dataset.k;if(!k)return;cur=k;tabs();drawLB()};
 }
+
+/* ---------- players section ---------- */
+let shown=24,q='';
+function drawPlayers(){
+  if(!LB.length){
+    $('playerList').innerHTML='<p class="muted">Player data is not available yet.</p>';
+    $('pCount').textContent='';$('more').style.display='none';return;
+  }
+  const f=LB.filter(p=>p.name.toLowerCase().includes(q)).sort((a,b)=>(b.playtime||0)-(a.playtime||0));
+  $('pCount').textContent=`${LB.length} players have joined the server`;
+  $('playerList').innerHTML=f.length?f.slice(0,shown).map(p=>memberCard(p,true)).join(''):'<p class="muted">No players match your search.</p>';
+  $('more').style.display=f.length>shown?'inline-block':'none';
+  bindTilt();
+}
+$('search').oninput=e=>{q=e.target.value.trim().toLowerCase();shown=24;drawPlayers()};
+$('more').onclick=()=>{shown+=24;drawPlayers()};
+
 async function loadLB(){
   try{
     const d=await (await fetch(CONFIG.statsFile+'?t='+Date.now())).json();
-    LB=d.players;LB.forEach(p=>{if(p.skin)SK[p.name]=p.skin});$('lbNote').textContent=d.updated?'Last updated: '+new Date(d.updated).toLocaleString():'';
-  }catch(e){LB=DEMO;$('lbNote').textContent='Demo data - stats.json milte hi real data dikhega.'}
-  tabs();drawLB();
+    // skip entries whose name could not be resolved (raw uuid fragments)
+    LB=(d.players||[]).filter(p=>!/^[0-9a-f]{8}$/.test(p.name));
+    LB.forEach(p=>{if(p.skin)SK[p.name]=p.skin});
+    $('lbNote').textContent=d.updated?'Last updated: '+new Date(d.updated).toLocaleString():'';
+  }catch(e){
+    LB=[];$('lbNote').textContent='Stats could not be loaded right now.';
+  }
+  tabs();drawLB();drawPlayers();drawOnline();
 }
 
-/* ---------- copy ---------- */
-$('ipBox').onclick=async()=>{
-  try{await navigator.clipboard.writeText(CONFIG.ip)}catch(e){}
-  const t=$('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600);
-};
+/* ---------- hero copy ---------- */
+$('ipBox').onclick=()=>copyText(CONFIG.ip);
 
 /* ---------- scroll reveal ---------- */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
