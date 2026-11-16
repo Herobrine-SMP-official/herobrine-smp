@@ -180,7 +180,7 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
     <button class="tab" data-j="bedrock">Bedrock Edition</button>
   </div>
   <div class="card" id="joinBody"></div>
-  <p style="margin-top:22px"><a class="btn" id="discord" target="_blank" rel="noopener">Join our Discord</a></p>
+    <p style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn" id="discord" target="_blank" rel="noopener">Join our Discord</a><a class="btn" id="instagram" target="_blank" rel="noopener">Join our Instagram</a></p>
 </section>
 </main>
 
@@ -197,6 +197,7 @@ const CONFIG = {
   bedrockPort: "19132",  // change this if your Bedrock port is different (check the Network tab in your panel)
   version: "26.3",
   discord: "https://discord.gg/xK6C2TBs7",
+  instagram: "https://ig.me/j/hLmbh7zRVj807eWq/",
   features: [
     {t:"Herobrine Lore", d:"Hidden quests and mysterious events."},
     {t:"Survival SMP", d:"Pure survival, no pay-to-win."},
@@ -263,6 +264,7 @@ function render(){
   $('ipText').textContent=CONFIG.ip;
   $('yr').textContent=new Date().getFullYear();
   $('discord').href=CONFIG.discord;
+  $('instagram').href=CONFIG.instagram;
   $('featList').innerHTML=CONFIG.features.map(f=>`<div class="card feat tilt"><h3>${esc(f.t)}</h3><p>${esc(f.d)}</p></div>`).join('');
   $('ruleList').innerHTML=CONFIG.rules.map(r=>`<li>${esc(r)}</li>`).join('');
   drawJoin('java');
