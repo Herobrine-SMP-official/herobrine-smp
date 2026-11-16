@@ -129,6 +129,13 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
   .kv{padding:9px 10px}
   .kv span{font-size:11px}
 }
+.row{grid-template-columns:30px 40px minmax(0,1fr) auto}
+.row b:nth-of-type(1){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row b:last-of-type{white-space:nowrap}
+@media (max-width:600px){
+  .row{gap:8px;padding:9px 10px;grid-template-columns:26px 36px minmax(0,1fr) auto;font-size:13px}
+  .row .rank{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -349,7 +356,7 @@ async function status(){
 
 /* ---------- leaderboard ---------- */
 const CATS=[
-  {k:'money',l:'Top Money',f:v=>'$'+v.toLocaleString()},
+  {k:'money',l:'Top Money',f:v=>'$'+(v>=1e12?(v/1e12).toFixed(2)+'T':v>=1e9?(v/1e9).toFixed(2)+'B':v>=1e6?(v/1e6).toFixed(2)+'M':v.toLocaleString())},
   {k:'kills',l:'Top Kills',f:v=>v.toLocaleString()},
   {k:'deaths',l:'Top Deaths',f:v=>v.toLocaleString()},
   {k:'playtime',l:'Playtime',f:v=>v.toLocaleString()+' hrs'},
