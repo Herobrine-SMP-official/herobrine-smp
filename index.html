@@ -89,6 +89,8 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
 .rv{opacity:0;transform:translateY(34px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.row{opacity:1;transform:none}}
+.sk{display:block;border-radius:9px;image-rendering:pixelated;background-repeat:no-repeat;background-size:800% 800%;background-position:71.4286% 14.2857%,14.2857% 14.2857%;background-color:#222}
+.pl .sk{width:46px;height:46px}.row .sk{width:36px;height:36px;border-radius:7px}
 </style>
 </head>
 <body>
@@ -182,17 +184,23 @@ const CONFIG = {
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const bedrockHead = n => {
+const SK = {};
+const letterHead = n => {
   const clean = n.replace(/^\.+/, '') || '?';
   let h = 0; for (const c of clean) h = (h * 31 + c.charCodeAt(0)) % 360;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="hsl(${h},55%,38%)"/><rect x="4" y="4" width="56" height="56" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="4"/><text x="32" y="44" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle" fill="#fff">${clean[0].toUpperCase()}</text></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="hsl(${h},55%,38%)"/><text x="32" y="44" font-family="monospace" font-size="34" font-weight="bold" text-anchor="middle" fill="#fff">${clean[0].toUpperCase()}</text></svg>`;
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 };
-const head = n => n.startsWith('.') ? bedrockHead(n) : `https://minotar.net/avatar/${encodeURIComponent(n)}/64`;
+const head = n => n.startsWith('.') ? letterHead(n) : `https://minotar.net/avatar/${encodeURIComponent(n)}/64`;
+const avatar = p => {
+  const s = p.skin || SK[p.name];
+  if (s) { const u = `url(https://textures.minecraft.net/texture/${s})`; return `<span class="sk" style="background-image:${u},${u}"></span>`; }
+  return `<img src="${head(p.name)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`;
+};
 const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 function playerCard(p){
-  return `<div class="card pl tilt"><img src="${head(p.name)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+  return `<div class="card pl tilt">${avatar(p)}
   <div><b>${esc(p.name)}</b>${p.role?` <span class="role">${esc(p.role)}</span>`:''}${p.joined?`<small>Joined: ${esc(p.joined)}</small>`:''}</div></div>`;
 }
 
@@ -262,7 +270,7 @@ function drawLB(){
   const list=[...LB].sort((a,b)=>(b[cur]||0)-(a[cur]||0)).slice(0,10);
   const max=Math.max(1,...list.map(p=>p[cur]||0));
   $('lb').innerHTML=list.map((p,i)=>`<div class="row r${i+1}" style="animation-delay:${i*70}ms">
-    <span class="rank">#${i+1}</span><img src="${head(p.name)}" alt="" onerror="this.style.visibility='hidden'">
+    <span class="rank">#${i+1}</span>${avatar(p)}
     <b>${esc(p.name)}</b><b>${c.f(p[cur]||0)}</b><span class="bar" data-w="${(p[cur]||0)/max*100}"></span></div>`).join('');
   requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll('.bar').forEach(b=>b.style.width=b.dataset.w+'%'),60));
 }
@@ -273,7 +281,7 @@ function tabs(){
 async function loadLB(){
   try{
     const d=await (await fetch(CONFIG.statsFile+'?t='+Date.now())).json();
-    LB=d.players;$('lbNote').textContent=d.updated?'Last updated: '+new Date(d.updated).toLocaleString():'';
+    LB=d.players;LB.forEach(p=>{if(p.skin)SK[p.name]=p.skin});$('lbNote').textContent=d.updated?'Last updated: '+new Date(d.updated).toLocaleString():'';
   }catch(e){LB=DEMO;$('lbNote').textContent='Demo data - stats.json milte hi real data dikhega.'}
   tabs();drawLB();
 }
