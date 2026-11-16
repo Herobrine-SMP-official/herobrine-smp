@@ -22,7 +22,7 @@ jobs:
           SFTP_PORT: ${{ secrets.SFTP_PORT }}
           SFTP_USER: ${{ secrets.SFTP_USER }}
           SFTP_PASS: ${{ secrets.SFTP_PASS }}
-          WORLD_FOLDER: world
+          WORLD_FOLDER: world/players
       - name: Commit
         run: |
           git config user.name "stats-bot"
