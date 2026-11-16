@@ -1,11 +1,11 @@
-import os, json, re, stat, datetime
+import os, json, re, datetime, urllib.request
 import paramiko
 
 HOST = os.environ["SFTP_HOST"]
 PORT = int(os.environ.get("SFTP_PORT", "22"))
 USER = os.environ["SFTP_USER"]
 PASS = os.environ["SFTP_PASS"]
-WORLD = os.environ.get("WORLD_FOLDER", "world")   # world folder ka naam
+WORLD = os.environ.get("WORLD_FOLDER", "world")
 ESS = "plugins/Essentials/userdata"
 
 t = paramiko.Transport((HOST, PORT))
@@ -16,7 +16,36 @@ def read(path):
     with sftp.open(path, "r") as f:
         return f.read().decode("utf-8", "ignore")
 
-# uuid -> name
+# purani skins yaad rakho, taaki API baar-baar na chale
+old = {}
+try:
+    for p in json.load(open("stats.json"))["players"]:
+        if p.get("skin"):
+            old[p["uuid"]] = p["skin"]
+except Exception:
+    pass
+
+fails = 0
+def bedrock_skin(uuid):
+    global fails
+    if not uuid.startswith("00000000-0000-0000-0009"):
+        return None
+    if uuid in old:
+        return old[uuid]
+    if fails >= 5:
+        return None
+    try:
+        xuid = int(uuid.replace("-", "")[16:], 16)
+        req = urllib.request.Request(
+            f"https://api.geysermc.org/v2/skin/{xuid}",
+            headers={"User-Agent": "herobrine-smp-stats"})
+        with urllib.request.urlopen(req, timeout=6) as r:
+            return json.load(r).get("texture_id")
+    except Exception as e:
+        fails += 1
+        print("skin error:", e)
+        return None
+
 names = {}
 try:
     for u in json.loads(read("usercache.json")):
@@ -46,19 +75,18 @@ for fa in sftp.listdir_attr(f"{WORLD}/stats"):
         pass
 
     players.append({
+        "uuid": uuid,
         "name": names.get(uuid, uuid[:8]),
+        "skin": bedrock_skin(uuid),
         "money": money,
         "kills": c.get("minecraft:player_kills", 0),
         "mobkills": c.get("minecraft:mob_kills", 0),
         "deaths": c.get("minecraft:deaths", 0),
-        "playtime": round(ticks / 72000, 1),   # hours
+        "playtime": round(ticks / 72000, 1),
         "mined": mined,
     })
 
-out = {
-    "updated": datetime.datetime.utcnow().isoformat() + "Z",
-    "players": players,
-}
+out = {"updated": datetime.datetime.utcnow().isoformat() + "Z", "players": players}
 with open("stats.json", "w") as f:
     json.dump(out, f)
 print("Done:", len(players), "players")
