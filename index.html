@@ -111,6 +111,15 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:34px;border-to
   .ip span{white-space:nowrap}
   .ip small{font-size:10px;padding:2px 7px}
 }
+.kv{flex-wrap:nowrap;gap:10px}
+.kv span{min-width:0;white-space:nowrap}
+.kv code{white-space:nowrap;word-break:normal;overflow-x:auto;min-width:0;font-size:clamp(11px,3.4vw,16px);scrollbar-width:none}
+.kv code::-webkit-scrollbar{display:none}
+.cp{flex:none}
+@media (max-width:600px){
+  .kv{padding:9px 10px}
+  .kv span{font-size:11px}
+}
 </style>
 </head>
 <body>
